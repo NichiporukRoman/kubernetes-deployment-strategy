@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-v2
+spec:
+  replicas: 2 # потом увеличиваем до стандартного значения
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 3
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+        version: "v2.0.0"
+    spec:
+      containers:
+      - name: nginx-container
+        image: nichiporukroman/my-nginx-image:latest
+        ports:
+        - containerPort: 80
