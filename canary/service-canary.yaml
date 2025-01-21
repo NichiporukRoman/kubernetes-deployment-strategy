@@ -1,0 +1,12 @@
+kind: Service
+metadata:
+  name: my-nginx-service-canary
+spec:
+  selector:
+    app: nginx
+    version: "v2.0.0"
+  ports:
+    - name: nginx 
+      protocol: TCP
+      port: 80
+  type: ClusterIP
